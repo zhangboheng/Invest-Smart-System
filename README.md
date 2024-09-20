@@ -75,6 +75,7 @@ Once the system is installed and the database is set up, you can start using the
 ### Tips
 
 - Investment news can set rules, supports API, DOM and RSS, all configured by yourself. I also provided a browser extension to help you collect investment news. Please see the [LuckyNews Box](https://github.com/zhangboheng/LuckyNews-Box)
+- Default Account:admin, Password:123456
 
 ### Contributing
 
