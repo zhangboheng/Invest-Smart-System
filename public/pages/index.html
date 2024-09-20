@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>财富增值攻略系统主页界面</title>
+        <link rel="stylesheet" type="text/css" href="../css/global.css">
+        <link rel="stylesheet" type="text/css" href="../css/homepage.css">
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+        <script src="/lib/jquery/jquery.min.js"></script>
+        <script>
+            $(function () {
+                layer.load();
+                $.ajax({
+                    url: '/api/getMenuList',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        const flowTable = $('.flowTable');
+                        flowTable.empty();
+                        if (data[0].ret) {
+                            const parse = JSON.parse(data[0].code);
+                            const flowTableContent = parse.map(item => `<li><img src="${item.imgurl}"><br /><input id="${item.pathway}" type="button" value="${item.menuname}" onclick="openPage('${item.link}')"></li>`).join('');
+                            flowTable.append(flowTableContent);
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            })
+        </script>
+    </head>
+
+    <body style="overflow:hidden;">
+        <div id="main">
+            <div id="left">
+                <div id="leftBox">
+                    <img src="../images/iconhuaban1-15-white.svg">
+                    <hr/>
+                    <p id="updateLog">功能区</p>
+                    <iframe allowtransparency="true" frameborder="0" width="400" height="64" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=3&t=1&v=2&d=2&bd=0&k=&f=ffffff&ltf=009944&htf=cc0000&q=0&e=1&a=1&c=54511&w=410&h=64&align=center"></iframe>
+                </div>
+            </div>
+            <div id="right">
+                <div class='rightInner'>
+                    <ul class="flowTable"></ul>
+                </div>
+            </div>
+        </div>
+        <script src="/lib/layui/layui.js"></script>
+        <script src="../js/global.companent.js"></script>
+        <script>
+            layui.use([
+                'layer', 'form'
+            ], function () {
+                var layer = layui.layer,
+                    form = layui.form;
+            });
+            // 点击跳转到内页
+            function openPage(_name){
+                window.location.href = _name
+            }
+        </script>
+    </body>
+
+</html>

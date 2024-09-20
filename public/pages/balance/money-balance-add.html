@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加收支记录</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">收支名称：</span><input id="msName" type="text"
+                        placeholder="请输入收入或者支出条目" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">何时发生：</span><input id="changeDate" type="date"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">收支金额：</span><input id="moneyVal" type="number"
+                        placeholder="请输入数值" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">流水类别：</span>
+                    <select id="moneyBalance" style="width:273px;">
+                        <option>== 请选择 ==</option>
+                        <option value="0">支出</option>
+                        <option value="1">收入</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">合理优化：</span>
+                    <input id="remarks" placeholder="添加备注……" type="text" style="width:273px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

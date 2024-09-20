@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>财富增值攻略系统之保险管理区</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/echarts/echarts.js"></script>
+    <script src="../../js/jquery.jqgrid.min.js"></script>
+    <script src="../../js/global.js" defer></script>
+    <script src="../../js/insurance.js" defer></script>
+</head>
+
+<body>
+    <div id="top">
+        <div class="topBox">
+            <h1 style="position: relative;left: 20px;"><img src="../../images/economic-logo-white.svg"
+                    style="width:30px;margin-right:10px;">保险管理区</h1>
+        </div>
+        <div class="topBox">
+            <ul>
+                <li id="backHome"><img src="../../images/iconhuaban1-15-white.svg" style="width:30px;">
+                    <p>首页</p>
+                </li>
+                <li id="loginOut"><img src="../../images/iconhuaban1-01-white.svg" style="width:30px;">
+                    <p>登出</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'insuranceControl')" id="defaultOpen">拥有保险</button>
+        </div>
+        <div id="insuranceControl" class="tabcontent">
+            <table id="inputTable" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnInsuranceSearch" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnInsuranceAdd" type="button" value="+添加" title="添加" style="background-color:cadetblue;" />
+                    </td>
+                    <td>
+                        <input id="btnInsuranceEdit" type="button" value="ƒ编辑" title="编辑" style="background-color:darkorange;" />
+                    </td>
+                    <td>
+                        <input id="btnInsuranceDelete" type="button" value="X删除" title="删除" style="background-color:crimson;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        保险名称：<input id="nameInsurance" type='text' class='txt' placeholder='医疗保险' />
+                    </td>
+                    <td>
+                        何时订购：<input id="stname" type='date' class='txt' />
+                    </td>
+                    <td>
+                        保险类别：<select class='select' id="baltype">
+                            <option>== 请选择 ==</option>
+                            <option value="0">基本保险</option>
+                            <option value="1">商业保险</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="searchInsuranceBtn" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                </tr>
+            </table>
+            <table id="gridTable"></table>
+        </div>
+    </div>
+
+    <script src="/lib/layui/layui.js"></script>
+    <script src="../../js/global.companent.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+    </script>
+</body>
+
+</html>

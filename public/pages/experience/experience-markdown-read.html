@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>经验分享文本预览</title>
+    <link  rel="stylesheet" type="text/css" href="../../css/markdown.css" />
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="../../js/marked.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        var url_ids = urlParams.get('id');;
+        $(function () {
+            $.ajax({
+                url: '/api/getExperienceIdTable',
+                type: 'GET',
+                data: {
+                    'ids': url_ids
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        document.getElementById('contentRead').innerHTML = marked.parse(parse[0].content);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="contentRead">
+
+    </div>
+</body>
+
+</html>

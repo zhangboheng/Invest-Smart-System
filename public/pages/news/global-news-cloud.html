@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>新闻词云</title>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/wordcloud2/src/wordcloud2.js"></script>
+    <style>
+        body{
+            margin:0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="my_canvas"></canvas>
+
+    <script>
+        var canvas = document.getElementsByTagName('canvas')[0];
+        canvas.setAttribute('width', $(window).width());
+        canvas.setAttribute('height', $(window).height());
+        canvas.style.width = $(window).width() + 'px';
+        canvas.style.height = $(window).height() - 5 + 'px';
+        const urlParams = new URLSearchParams(window.location.search);
+        const key = urlParams.get('getitle');
+        var cloudArr = []
+        $.ajax({
+            url: '/api/getCloud',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                if (data[0].ret) {
+                    words = JSON.parse(data[0].code);
+                    let count = words.reduce((acc, curr) => {
+                        acc[curr] = (acc[curr] || 0) + 1;
+                        return acc;
+                    }, {});
+                    let header = Object.keys(count)
+                    let tail = Object.values(count)
+                    header.forEach((item,index)=>{
+                        cloudArr[index] = [item, tail[index]]
+                    })
+                }
+                console.info(cloudArr.slice(10,15))
+                var options = {
+                    list: cloudArr,
+                    fontWeight: 'bold',
+                    color: "random-dark",
+                    backgroundColor: "#ffffff",
+                    weightFactor: 10,
+                    rotateRatio: 0.5,
+                    shuffle: true,
+                    drawOutOfBound:false,
+                    shrinkToFit:true,
+                    gridSize:2
+                }
+
+                WordCloud(document.getElementById('my_canvas'), options);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    </script>
+</body>
+
+</html>

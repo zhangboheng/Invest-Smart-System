@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>编辑 Todo 项目</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="/lib/jquery-datetimepicker/build/jquery.datetimepicker.min.css">
+    <script src="../../js/global.js"></script>
+    <script src="/lib/jquery/jquery.js"></script>
+    <script src="/lib/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $(function () {
+             const urlParams = new URLSearchParams(window.location.search);
+            const getId = urlParams.get('ids');
+            jQuery.datetimepicker.setLocale('ch');
+            $('#stimeAdd').datetimepicker();
+            $.ajax({
+                url: '/api/getToDoIdTable',
+                type: 'GET',
+                data: {
+                    ids: getId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        for (let i = 0; i < parse.length; i++) {
+                            $('#nameAdd').val(`${parse[i].toname}`)
+                            $('#stimeAdd').val(`${parse[i].ordertime}`)
+                            $('#remarksAdd').val(`${parse[i].remarks}`)
+                            $('#revenueAdd').val(`${parse[i].remainder}`)
+                        }
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                complete: function (res) {
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">代办事项：</span><input id="nameAdd" type="text"
+                        placeholder="请输入代办事项，如：洗澡" style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">开始时间：</span><input id="stimeAdd" type="text"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">提醒周期：</span>
+                    <select id="revenueAdd" style="width:273px;border:none;">
+                        <option>== 请选择 ==</option>
+                        <option value="never">从不</option>
+                        <option value="hours">小时</option>
+                        <option value="daily">一天</option>
+                        <option value="weekdays">一周</option>
+                        <option value="biweekly">双周</option>
+                        <option value="monthly">一月</option>
+                        <option value="quarteryearly">三月</option>
+                        <option value="halfyearly">六月</option>
+                        <option value="yearly">一年</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">注意事项：</span>
+                    <input id="remarksAdd" placeholder="请输入备注……" type="text" style="width:273px;border:none;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

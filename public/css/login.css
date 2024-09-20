@@ -1,0 +1,84 @@
+#main {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: url('../images/loginbackground.jpg') no-repeat fixed;
+    background-size: cover;
+}
+
+#left {
+    width: 60%;
+    height: auto;
+    background-color: crimson;
+    display: table;
+    opacity: 0.8;
+}
+
+
+#leftBox {
+    display: table-cell;
+    vertical-align: middle;
+    background-image:url(../images/topbanner.jpg);
+    background-position: 50% 50%;
+}
+
+#leftBox hr {
+    width: 40%;
+}
+
+#leftBox h1 {
+    display: block;
+    font-size: 48px;
+}
+
+#updateLog {
+    cursor: pointer;
+}
+
+#right {
+    width: 40%;
+    height: 100%;
+    background-color: #fff;
+    opacity: 0.9;
+    overflow-y: scroll;
+}
+
+#login,
+#password{
+    width:310px;
+    height:33px;
+    margin-bottom:10px;
+}
+
+#loginBtn{
+    width: 316px;
+    height: 40px;
+    color: #fff;
+    cursor: pointer;
+    background-color: crimson;
+}
+
+#loginBtn:hover{
+    color:crimson;
+    background-color:#fff;
+}
+
+#loginBtn:active{
+    color:#fff;
+    background-color:crimson;
+}
+
+svg{
+    border: 1px solid #000;
+    margin-left: 8px;
+}
+
+#vertifyCode{
+    width:200px;
+    height:33px;
+    position: relative;
+    bottom:14px;
+}

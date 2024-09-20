@@ -1,0 +1,144 @@
+#mainTabs {
+    height: calc(100vh - 131px);
+    overflow: auto;
+    display: flex;
+    width: 100%;
+}
+
+.human-body {
+    position: relative;
+    display: block;
+    top: 5vh;
+    transform: scale(2);
+    width: 60%;
+    height: 0%;
+}
+
+.human-body svg:hover {
+    cursor: pointer;
+}
+
+.human-body svg:hover path {
+    fill: crimson;
+}
+
+.human-body svg {
+    position: absolute;
+    left: 50%;
+    fill: #57c9d5;
+}
+
+.human-body svg#head {
+    margin-left: -28.5px;
+    top: -6px;
+}
+
+.human-body svg#left-shoulder {
+    margin-left: -53.5px;
+    top: 69px;
+}
+
+.human-body svg#right-shoulder {
+    margin-left: 13.5px;
+    top: 69px;
+}
+
+.human-body svg#left-arm {
+    margin-left: -78px;
+    top: 112px;
+}
+
+.human-body svg#right-arm {
+    margin-left: 38px;
+    top: 112px;
+    z-index: 10001;
+}
+
+.human-body svg#chest {
+    margin-left: -43.5px;
+    top: 88px;
+}
+
+.human-body svg#stomach {
+    margin-left: -37.5px;
+    top: 130px;
+}
+
+.human-body svg#left-leg {
+    margin-left: -46.5px;
+    top: 205px;
+    z-index: 9999;
+}
+
+.human-body svg#right-leg {
+    margin-left: 1.5px;
+    top: 205px;
+    z-index: 9999;
+}
+
+.human-body svg#left-hand {
+    margin-left: -102.5px;
+    top: 224px;
+}
+
+.human-body svg#right-hand {
+    margin-left: 66.5px;
+    top: 224px;
+    z-index: 10000;
+}
+
+.human-body svg#left-foot {
+    margin-left: -35.5px;
+    top: 455px;
+}
+
+.human-body svg#right-foot {
+    margin-left: 5.5px;
+    top: 455px;
+}
+
+#area {
+    display: table;
+    text-align: center;
+    font-size: 25px;
+    width: 40%;
+}
+
+#area #data {
+    color: black;
+}
+
+#area table {
+    border-collapse: collapse;
+    width: 75%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#area td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+#area tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#area caption {
+    font-size: 2rem;
+}
+
+#area button {
+    width:100px;
+    height:40px;
+    font-size:1rem
+}
+
+#basicBtn {
+    position: absolute;
+    left: 30%;
+    width: 80px;
+    height: 30px;
+}

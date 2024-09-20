@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加优惠信息</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">活动名称：</span><input id="showname" type="text"
+                        placeholder="买单吧最红星期五" style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">巨惠类别：</span><select class='select' id="discounttype" style="width:276px;">
+                        <option value="0">== 请选择 ==</option>
+                        <option value="1">话费</option>
+                        <option value="2">美食</option>
+                        <option value="3">服装</option>
+                        <option value="4">超市</option>
+                        <option value="5">3C</option>
+                        <option value="6">虚拟</option>
+                        <option value="7">出行</option>
+                        <option value="8">房子</option>
+                        <option value="9">综合</option>
+                        <option value="10">电影</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">截止日期：</span><input id="outdate" type="date"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">活动规则：</span><input id="rule" type="text"
+                        placeholder="请输入数值" style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">注意事项：</span><input id="remarksAdd" type="text" style="width:273px;border:none;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>编辑收支记录</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const getId = urlParams.get('ids');
+        //jQuery ready
+        $(function () {
+            $('#hideIds').html(getId);
+            $.ajax({
+                url: '/api/getInsuranceIdTable',
+                type: 'GET',
+                data: {
+                    ids: getId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        for (let i = 0; i < parse.length; i++) {
+                            $('#ccode').val(parse[i].ccode);
+                            $('#nameSafe').val(parse[i].name);
+                            $('#changeDate').val(parse[i].useday.split('T')[0]);
+                            $('#namePublish').val(parse[i].publish);
+                            $('#moneyVal').val(parse[i].revenue);
+                            $('#remarks').val(parse[i].remarks);
+                            $('#safeType').val(parse[i].baltype);
+                        }
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                complete: function (res) {
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">序列号吗：</span><input id="ccode" type="text"
+                        placeholder="请输入保险序列号" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">保险名称：</span><input id="nameSafe" type="text"
+                        placeholder="请输入保险名称" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">何时订购：</span><input id="changeDate" type="date"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">承包机构：</span><input id="namePublish" type="text"
+                        placeholder="请输入保险发行机构" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">保险余额：</span><input id="moneyVal" type="number"
+                        placeholder="请输入数值" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">保险类别：</span>
+                    <select id="safeType" style="width:273px;">
+                        <option>== 请选择 ==</option>
+                        <option value="0">基本保险</option>
+                        <option value="1">商业保险</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">攻略备注：</span>
+                    <input id="remarks" placeholder="攻略备注……" type="text" style="width:273px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

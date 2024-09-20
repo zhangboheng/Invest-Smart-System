@@ -1,0 +1,120 @@
+#main {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background: url('../images/loginbackground.jpg') no-repeat fixed;
+    background-size: cover;
+}
+
+#left {
+    width: 20%;
+    height: auto;
+    background-color: crimson;
+    display: table;
+    opacity: 0.8;
+}
+
+
+#leftBox {
+    display: table-cell;
+    vertical-align: middle;
+    background-image:url(../images/topbanner.jpg);
+    background-position: 50% 50%;
+    max-width: 400px;
+}
+
+#leftBox hr {
+    width: 40%;
+}
+
+#leftBox h1 {
+    display: block;
+    font-size: 48px;
+}
+
+#updateLog {
+    font-size:2em;
+}
+
+#right {
+    width: 80%;
+    background-color: #fff;
+    opacity: 0.9;
+    overflow-y: auto;
+    display:table;
+}
+
+#login,
+#password{
+    width:310px;
+    height:33px;
+    margin-bottom:10px;
+}
+
+#loginBtn{
+    width:320px;
+    height:40px;
+    color:#fff;
+    cursor:pointer;
+    background-color:crimson;
+}
+
+#loginBtn:hover{
+    color:crimson;
+    background-color:#fff;
+}
+
+#loginBtn:active{
+    color:#fff;
+    background-color:crimson;
+}
+
+svg{
+    border: 1px solid #000;
+    margin-left: 8px;
+}
+
+img{
+    width:60%;
+}
+
+#vertifyCode{
+    width:200px;
+    height:33px;
+    position: relative;
+    bottom:14px;
+}
+
+.rightInner{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#right .rightInner ul.flowTable li {
+    float: left;
+    width: 25%;
+    opacity: 0.8;
+}
+
+input[type='button']{
+    border:none;
+    cursor:pointer;
+    width:150px;
+    height:40px;
+    font-size:24px;
+    color:#fff;
+    background:crimson;
+}
+
+input[type='button']:hover{
+    color:crimson;
+    background:#fff;
+}
+
+input[type='button']:active{
+    color:#fff;
+    background:crimson;
+}

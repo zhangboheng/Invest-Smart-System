@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加投资标的股票</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <style>
+        #inputTable tr td{
+            display: flex;
+            justify-content: space-between;
+        }
+        #inputTable tr td input,
+        #inputTable tr td select {
+            width: 100%;
+        }
+        #inputTable tr td span {
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px;border:0;">
+            <tr>
+                <td>
+                    <span>股票代码：</span><input id="tcodeAdd" type="text"
+                        placeholder="请输入股票代码，如：000001" style="border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>股票名称：</span><input id="nameAdd" type="text"
+                        placeholder="请输入股票名称，如：平安银行" style="border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>上市日期：</span><input id="stimeAdd" type="date"
+                        style="border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>所属城市：</span><input id="cityAdd" type="text"
+                        placeholder="请输入城市名称，如：上海" style="border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>所属行业：</span><input id="categoryAdd" type="text"
+                        placeholder="请输入行业名称，如：银行" style="border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>是否在市：</span>
+                    <select id="inornotAdd" style="border:none;">
+                        <option>== 请选择 ==</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>盈利预期：</span>
+                    <select id="revenueAdd" style="border:none;">
+                        <option>== 请选择 ==</option>
+                        <option value="low">低预期</option>
+                        <option value="mid">中预期</option>
+                        <option value="high">高预期</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>分红预期：</span>
+                    <select id="dividendsAdd" style="border:none;">
+                        <option>== 请选择 ==</option>
+                        <option value="0">低频次</option>
+                        <option value="1">中频次</option>
+                        <option value="2">高频次</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>未来发展：</span>
+                    <select id="reasonAdd" style="border:none;">
+                        <option>== 请选择 ==</option>
+                        <option value="low">低预期</option>
+                        <option value="middle">中预期</option>
+                        <option value="high">高预期</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>合理分析：</span>
+                    <input id="analyticsAdd" placeholder="请输入理由……" type="text" style="border:none;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

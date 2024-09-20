@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加投资标的基金</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">基金代码：</span><input id="tcodeAdd" type="text"
+                        placeholder="请输入基金代码，如：011103" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">基金名称：</span><input id="nameAdd" type="text"
+                        placeholder="请输入基金名称，如：天弘中证光伏产业指数C" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">基金经理：</span><input id="managerAdd" type="text"
+                        style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">管理规模：</span><input id="sizeAdd" type="number"
+                        placeholder="请输入数值" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">购买动机：</span>
+                    <select id="buyReasonAdd" style="width:273px;">
+                        <option>== 请选择 ==</option>
+                        <option value="history">历史曲线</option>
+                        <option value="future">未来发展</option>
+                        <option value="manager">基金经理</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">是否持有：</span>
+                    <select id="holdAdd" style="width:273px;">
+                        <option>== 请选择 ==</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">合理分析：</span>
+                    <input id="remarksAdd" placeholder="请输入理由……" type="text" style="width:273px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

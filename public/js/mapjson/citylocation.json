@@ -1,0 +1,72 @@
+{
+    "ret": true,
+    "total": 11,
+    "locationInfo": [
+      {
+        "name": "tangshan",
+        "chinese" : "唐山市",
+        "longitude": 118.1802,
+        "latitude": 39.6304
+      },
+      {
+        "name": "shenzhen",
+        "chinese" : "深圳市",
+        "longitude": 114.0859,
+        "latitude": 22.5472
+      },
+      {
+        "name": "shanghai",
+        "chinese" : "上海市",
+        "longitude": 121.4737,
+        "latitude": 31.2304
+      },
+      {
+        "name": "beijing",
+        "chinese" : "北京市",
+        "longitude": 116.405285,
+        "latitude": 39.904989
+      },
+      {
+        "name": "xianggang",
+        "chinese" : "香港",
+        "longitude": 114.1694,
+        "latitude": 22.3193
+      },
+      {
+        "name": "huzhiming",
+        "chinese" : "胡志明市",
+        "longitude": 106.6297,
+        "latitude": 10.8231
+      },
+      {
+        "name": "mengmai",
+        "chinese" : "孟买市",
+        "longitude": 72.8777,
+        "latitude": 19.0760
+      },
+      {
+        "name": "newyork",
+        "chinese" : "纽约市",
+        "longitude": -74.0060,
+        "latitude": 40.7128
+      },
+      {
+        "name": "tokyo",
+        "chinese" : "东京市",
+        "longitude": 139.6503,
+        "latitude": 35.6762
+      },
+      {
+        "name": "singapore",
+        "chinese" : "新加坡市",
+        "longitude": 103.8198,
+        "latitude": 1.3521
+      },
+      {
+        "name": "taipei",
+        "chinese" : "台北市",
+        "longitude": 121.5654,
+        "latitude": 25.033
+      }
+    ]
+  }

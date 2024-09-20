@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>财富增值攻略系统之收支记录区</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/echarts/echarts.js"></script>
+    <script src="../../js/jquery.jqgrid.min.js"></script>
+    <script src="../../js/global.js" defer></script>
+    <script src="../../js/balance.js" defer></script>
+    <script>
+        var stockArr = [];
+        //时间参数开始
+        var allDate = new Date();
+        var lastAllDate = new Date();
+        var thisYear = allDate.getFullYear();
+        var thisMonth = String(allDate.getMonth() + 1).padStart(2, '0');
+        var thisDay = String(allDate.getDate()).padStart(2,'0');
+        var thisDate = thisYear + '-' + thisMonth + '-' + thisDay;
+
+        lastAllDate.setMonth(lastAllDate.getMonth() - 1);
+        var lastYear = lastAllDate.getFullYear();
+        var lastMonth = String(lastAllDate.getMonth() + 1).padStart(2, '0');
+        var lastDay = String(lastAllDate.getDate()).padStart(2,'0');
+        var lastDate = lastYear + '-' + lastMonth + '-' + lastDay;
+        //时间参数结束
+        //jQuery ready
+        $(function () {
+            $.ajax({
+                url: '/api/getBalanceTable',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        for (let i = 0; i < parse.length; i++) {
+                            stockArr.push({ id: parse[i].id, name: parse[i].name, date: parse[i].date.split('T')[0], money: parse[i].money, baltype: parse[i].baltype, remarks: parse[i].remarks });
+                        }
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                complete: function (res) {
+                    $("#gridTable").jqGrid({
+                        autowidth: true,
+                        height: $(window).height() - 284,
+                        colModel: [
+                            { name: "id", label: "编号", width: 40, hidden: true },
+                            { name: "name", label: "收支名称", width: 40 },
+                            { name: "date", label: "何时发生", width: 50 },
+                            { name: "money", label: "收支金额", width: 50 },
+                            { name: "baltype", label: "流水类别", formatter: balanceType, width: 30 },
+                            { name: "remarks", label: "合理优化" },
+                        ],
+                        data: stockArr,
+                        guiStyle: "bootstrap",
+                        multiselect: true,
+                        iconSet: "fontAwesome",
+                        sortname: "date",
+                        sortorder: "desc",
+                        rowList: [10, 20, 30, 50, 100],
+                        pager: true,
+                        viewrecords: true,
+                        rowNum: 30,
+                        shrinkToFit: true,
+                        beforeRequest: function () {
+                            layer.load();
+                        }, gridComplete: function () {
+                            layer.closeAll('loading');
+                        }
+                    }).jqGrid('setFrozenColumns');
+                }
+            });
+            $('#startTime').val(lastDate);
+            $('#endTIme').val(thisDate);
+            $('#startTimeTwo').val(lastDate);
+            $('#endTImeTwo').val(thisDate);
+        });
+        //设置流水类别
+        function balanceType(cellvalue, options, rowObject) {
+            if (cellvalue == '0') {
+                return '支出';
+            } else {
+                return '收入';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="top">
+        <div class="topBox">
+            <h1 style="position: relative;left: 20px;"><img src="../../images/economic-logo-white.svg"
+                    style="width:30px;margin-right:10px;">收支记录区</h1>
+        </div>
+        <div class="topBox">
+            <ul>
+                <li id="backHome"><img src="../../images/iconhuaban1-15-white.svg" style="width:30px;">
+                    <p>首页</p>
+                </li>
+                <li id="loginOut"><img src="../../images/iconhuaban1-01-white.svg" style="width:30px;">
+                    <p>登出</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'balanceTab')" id="defaultOpen">收支账簿</button>
+            <button class="tablinks" onclick="openCity(event, 'financeTab');getSmartCharts(lastDate,thisDate);">财务曲线</button>
+            <button class="tablinks" onclick="openCity(event, 'changesTab');getChangeCharts(lastDate,thisDate);">变动统计</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="balanceTab" class="tabcontent">
+            <table id="inputTable" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnSearch" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnAdd" type="button" value="+添加" title="添加" style="background-color:cadetblue;" />
+                    </td>
+                    <td>
+                        <input id="btnEdit" type="button" value="ƒ编辑" title="编辑" style="background-color:darkorange;" />
+                    </td>
+                    <td>
+                        <input id="btnDelete" type="button" value="X删除" title="删除" style="background-color:crimson;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        收支名称：<input id="nameItem" type='text' class='txt' placeholder='美团外卖' />
+                    </td>
+                    <td>
+                        何时发生：<input id="stname" type='date' class='txt' />
+                    </td>
+                    <td>
+                        流水类别：<select class='select' id="baltype">
+                            <option>== 请选择 ==</option>
+                            <option value="0">支出</option>
+                            <option value="1">收入</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="searchBtn" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                </tr>
+            </table>
+            <table id="gridTable"></table>
+        </div>
+        <div id="financeTab" class="tabcontent">
+            <table id="inputTableTwo" class="tableService" style="padding-top: 10px;">
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        开始时间：<input id="startTime" type='date' class='txt' />
+                    </td>
+                    <td>
+                        结束时间：<input id="endTIme" type='date' class='txt' />
+                    </td>
+                    <td>
+                        <input id="searchBtnTwo" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                    <td>
+                        <span id="incomeTotal"></span>
+                        <span id="payTotal"></span>
+                    </td>
+                </tr>
+            </table>
+            <div id="fundEcharts"></div>
+        </div>
+        <div id="changesTab" class="tabcontent">
+            <table id="inputTableThree" class="tableService" style="padding-top: 10px;">
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        开始时间：<input id="startTimeTwo" type='date' class='txt' />
+                    </td>
+                    <td>
+                        结束时间：<input id="endTImeTwo" type='date' class='txt' />
+                    </td>
+                    <td>
+                        <input id="searchBtnThree" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                </tr>
+            </table>
+            <div id="changesEcharts"></div>
+        </div>
+    </div>
+
+    <script src="/lib/layui/layui.js"></script>
+    <script src="../../js/global.companent.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+    </script>
+</body>
+
+</html>

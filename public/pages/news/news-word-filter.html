@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加关键词黑名单</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: '/api/getBlackListWords',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        for (let i = 0; i < parse.length; i++) {
+                            $('#blackList').val(parse[i].title);
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">关键词表：</span><input id="blackList" type="text"
+                        placeholder="请输入关键词，以'|'分隔" style="width:273px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

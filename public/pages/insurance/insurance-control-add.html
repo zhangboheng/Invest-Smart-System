@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加保险记录</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">序列号码：</span><input id="ccode" type="text"
+                        placeholder="请输入保险序列号" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">保险名称：</span><input id="nameSafe" type="text"
+                        placeholder="请输入保险名称" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">何时订购：</span><input id="changeDate" type="date"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">承包机构：</span><input id="namePublish" type="text"
+                        placeholder="请输入保险承保机构" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">保险余额：</span><input id="moneyVal" type="number"
+                        placeholder="请输入数值" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">保险类别：</span>
+                    <select id="safeType" style="width:273px;">
+                        <option>== 请选择 ==</option>
+                        <option value="0">基本保险</option>
+                        <option value="1">商业保险</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">攻略备注：</span>
+                    <input id="remarks" placeholder="攻略备注……" type="text" style="width:273px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

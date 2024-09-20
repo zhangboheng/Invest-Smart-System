@@ -1,0 +1,49 @@
+{
+  "name": "invest-smart-system",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "build": "node ./index.js",
+    "auto": "pm2 start ./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@node-rs/jieba": "^1.10.3",
+    "async": "^3.2.4",
+    "body-parser": "^1.20.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "echarts": "^5.3.2",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "http": "^0.0.1-security",
+    "iconv-lite": "^0.6.3",
+    "install": "^0.13.0",
+    "jquery": "^3.6.0",
+    "jquery-datetimepicker": "^2.5.21",
+    "jquery-ui-dist": "^1.13.1",
+    "jsmind": "^0.5.2",
+    "layui": "^2.6.11",
+    "mysql": "^2.18.1",
+    "npm": "^8.12.1",
+    "path": "^0.12.7",
+    "pm2": "^5.4.2",
+    "request": "^2.88.2",
+    "stopword": "^2.0.7",
+    "stopwords-zh": "^0.4.0",
+    "svg-captcha": "^1.4.0",
+    "url-exist": "^3.0.1",
+    "utf8": "^3.0.0",
+    "wordcloud2": "^1.0.0",
+    "xml2js": "^0.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

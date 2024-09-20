@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>财富增值攻略系统之信息录入区</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../../css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../../css/ui.jqgrid.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="../../js/jquery.jqgrid.min.js"></script>
+    <script src="../../js/global.js" defer="true"></script>
+    <script src="../../js/index.js" defer="true"></script>
+    <script>
+        var stockArr = [];
+        //jQuery ready
+        $(function () {
+            $.ajax({
+                url: '/api/getStockTable',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        for (let i = 0; i < parse.length; i++) {
+                            stockArr.push({ id: parse[i].id, name: parse[i].stockname, date: parse[i].ipoday.split('T')[0], city: parse[i].city, rate: parse[i].rate, predict: parse[i].revenue, dividends: parse[i].dividends, reasons: parse[i].reason, inmarket: parse[i].inmarket, category: parse[i].category, analytics: parse[i].remarks });
+                        }
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                complete: function (res) {
+                    $("#gridTable").jqGrid({
+                        autowidth: true,
+                        height: $(window).height() - 284,
+                        colModel: [
+                            { name: "id", label: "股票代码", width: 15 },
+                            { name: "name", label: "股票名称", width: 20 },
+                            { name: "date", label: "上市日期", width: 20 },
+                            { name: "city", label: "所属城市", width: 20 },
+                            { name: "category", label: "所属行业", width: 15},
+                            { name: "inmarket", label: "是否在市", formatter: inOrNot, width: 15},
+                            { name: "predict", label: "盈利预期", formatter: predictLevel, width: 15 },
+                            { name: "dividends", label: "分红频率", formatter: dividendsOrNot, width: 15 },
+                            { name: "reasons", label: "未来发展", formatter: reasonFuture, width: 15 },
+                            { name: "analytics", label: "合理分析" },
+                            { name: "rate", label: "投资胜率", width: 15},
+                        ],
+                        data: stockArr,
+                        guiStyle: "bootstrap",
+                        multiselect: true,
+                        iconSet: "fontAwesome",
+                        sortname: "id",
+                        sortorder: "asc",
+                        rowList: [10, 20, 30, 50, 100, 500, 1000],
+                        pager: true,
+                        viewrecords: true,
+                        rowNum: 500,
+                        shrinkToFit: true,
+                        beforeRequest: function () {
+                            layer.load();
+                        }, gridComplete: function () {
+                            layer.closeAll('loading');
+                            //在表格加载完成后执行
+                            var ids = $("#gridTable").jqGrid("getDataIDs");//获取所有行的id
+                            var rowDatas = $("#gridTable").jqGrid("getRowData");//获取所有行的数据
+                            for (var ii = 0; ii < rowDatas.length; ii++) {
+                                var rowData = rowDatas[ii];
+                                if (rowData.rate < 0.6 ) {
+                                    $("#" + ids[ii] + " td").css({
+                                        "background-color":"#000",
+                                        "color":"#fff"
+                                    });
+                                } else if (rowData.rate >= 0.6 && rowData.rate < 0.75 ) {
+                                    $("#" + ids[ii] + " td").css({
+                                        "background-color":"#666",
+                                        "color":"#fff"
+                                    });
+                                }
+                            }
+                        }
+                    }).jqGrid('setFrozenColumns');
+                }
+            });
+        })
+        //设置盈利预期
+        function predictLevel(cellvalue, options, rowObject) {
+            if (cellvalue == 'low') {
+                return '低预期';
+            } else if (cellvalue == 'mid') {
+                return '中预期';
+            } else {
+                return '高预期';
+            }
+        }
+        //设置分红频率
+        function dividendsOrNot(cellvalue, options, rowObject){
+            if (cellvalue == 2) {
+                return '高频次';
+            } else if (cellvalue == 1){
+                return '中频次';
+            }else {
+                return '低频次';
+            }            
+        }
+        //设置未来发展
+        function reasonFuture(cellvalue, options, rowObject) {
+            if (cellvalue == 'low') {
+                return '低预期';
+            } else if (cellvalue == 'middle') {
+                return '中预期';
+            } else {
+                return '高预期';
+            }
+        }
+        //设置是否在市
+        function inOrNot(cellvalue, options, rowObject){
+            return cellvalue == "1" ? '是' : '否';
+        }
+    </script>
+</head>
+
+<body>
+    <div id="top">
+        <div class="topBox">
+            <h1 style="position: relative;left: 20px;"><img src="../../images/economic-logo-white.svg"
+                    style="width:30px;margin-right:10px;">信息录入区</h1>
+        </div>
+        <div class="topBox">
+            <ul>
+                <li id="backHome"><img src="../../images/iconhuaban1-15-white.svg" style="width:30px;">
+                    <p>首页</p>
+                </li>
+                <li id="loginOut"><img src="../../images/iconhuaban1-01-white.svg" style="width:30px;">
+                    <p>登出</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'stockTab')" id="defaultOpen">A股策略</button>
+            <button class="tablinks" onclick="openCity(event, 'fundsTab'); getFundsData()">基金策略</button>
+            <button class="tablinks" onclick="openCity(event, 'savingTab'); getDiscountData()">优惠策略</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="stockTab" class="tabcontent">
+            <table id="inputTable" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnSearch" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnAdd" type="button" value="+添加" title="添加" style="background-color:cadetblue;" />
+                    </td>
+                    <td>
+                        <input id="btnEdit" type="button" value="ƒ编辑" title="编辑" style="background-color:darkorange;" />
+                    </td>
+                    <td>
+                        <input id="btnDelete" type="button" value="X删除" title="删除" style="background-color:crimson;" />
+                    </td>
+                    <td>
+                        <input id="btnReport" type="button" value="√公告" title="公告" style="background-color:purple;" />
+                    </td>
+                    <td>
+                        <input id="btnAll" type="button" value="∆总纲" title="总纲" style="background-color:dodgerblue" />
+                    </td>
+                    <td>
+                        <input id="exportExcel" type="button" value="∫导出" title="导出" style="background-color:green" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        股票代码：<input id="stockid" type='number' class='txt' placeholder='000001' />
+                    </td>
+                    <td>
+                        股票名称：<input id="stname" type='text' class='txt' placeholder='贵州茅台' />
+                    </td>
+                    <td>
+                        盈利预期：<select class='select' id="revenuePredict">
+                            <option>== 请选择 ==</option>
+                            <option value="low">低预期</option>
+                            <option value="mid">中预期</option>
+                            <option value="high">高预期</option>
+                        </select>
+                    </td>
+                    <td>
+                        未来发展：<select class='select' id="reasonWhy">
+                            <option>== 请选择 ==</option>
+                            <option value="low">低预期</option>
+                            <option value="middle">中预期</option>
+                            <option value="high">高预期</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="searchBtn" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                </tr>
+            </table>
+            <table id="gridTable"></table>
+        </div>
+
+        <div id="fundsTab" class="tabcontent">
+            <table id="inputTableTwo" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnSearchTwo" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnAddTwo" type="button" value="+添加" title="添加"
+                            style="background-color:cadetblue;" />
+                    </td>
+                    <td>
+                        <input id="btnEditTwo" type="button" value="ƒ编辑" title="编辑"
+                            style="background-color:darkorange;" />
+                    </td>
+                    <td>
+                        <input id="btnDeleteTwo" type="button" value="X删除" title="删除"
+                            style="background-color:crimson;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        基金代码：<input id="stockidTwo" type='number' class='txt' placeholder='011103' />
+                    </td>
+                    <td>
+                        基金名称：<input id="stnameTwo" type='text' class='txt' placeholder='天弘中证光伏产业指数C' />
+                    </td>
+                    <td>
+                        购买动机：<select class='select' id="buyReason">
+                            <option>== 请选择 ==</option>
+                            <option value="history">历史曲线</option>
+                            <option value="future">未来发展</option>
+                            <option value="manager">基金经理</option>
+                        </select>
+                    </td>
+                    <td>
+                        是否持有：<select class='select' id="ownOrNot">
+                            <option value="2">== 请选择 ==</option>
+                            <option value="1">是</option>
+                            <option value="0">否</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="searchBtnTwo" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                </tr>
+            </table>
+            <table id="gridTableTwo"></table>
+        </div>
+
+        <div id="savingTab" class="tabcontent">
+            <table id="inputTableThree" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnSearchThree" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnAddThree" type="button" value="+添加" title="添加"
+                            style="background-color:cadetblue;" />
+                    </td>
+                    <td>
+                        <input id="btnEditThree" type="button" value="ƒ编辑" title="编辑"
+                            style="background-color:darkorange;" />
+                    </td>
+                    <td>
+                        <input id="btnDeleteThree" type="button" value="X删除" title="删除"
+                            style="background-color:crimson;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        活动名称：<input id="stockidThree" type='text' class='txt' placeholder='交通银行最红星期五' />
+                    </td>
+                    <td>
+                        优惠类别：<select class='select' id="stnameThree">
+                            <option value="0">== 请选择 ==</option>
+                            <option value="1">话费</option>
+                            <option value="2">美食</option>
+                            <option value="3">服装</option>
+                            <option value="4">超市</option>
+                            <option value="5">3C</option>
+                            <option value="6">虚拟</option>
+                            <option value="7">出行</option>
+                            <option value="8">房子</option>
+                            <option value="9">综合</option>
+                            <option value="10">电影</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input id="searchBtnThree" type="button" value="ø搜索" style="background-color:crimson;" />
+                    </td>
+                </tr>
+            </table>
+            <table id="gridTableThree"></table>
+            <div id="flowBtn"></div>
+        </div>
+    </div>
+
+    <script src="/lib/layui/layui.js"></script>
+    <script src="../../js/global.companent.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+    </script>
+</body>
+
+</html>

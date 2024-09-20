@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>财富增值攻略系统之头脑风暴区</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="/lib/jsmind/style/jsmind.css">
+    <script src="/lib/jquery/jquery.js"></script>
+    <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../../js/global.js" defer></script>
+    <script src="../../js/brainMapping.js" defer></script>
+    <style type="text/css">
+        #brainmapping {
+            height: calc(100vh - 132px);
+            border: solid 1px #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top">
+        <div class="topBox">
+            <h1 style="position: relative;left: 20px;"><img src="../../images/economic-logo-white.svg"
+                    style="width:30px;margin-right:10px;">头脑风暴区</h1>
+        </div>
+        <div class="topBox">
+            <ul>
+                <li id="backHome"><img src="../../images/iconhuaban1-15-white.svg" style="width:30px;">
+                    <p>首页</p>
+                </li>
+                <li id="loginOut"><img src="../../images/iconhuaban1-01-white.svg" style="width:30px;">
+                    <p>登出</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="tab">
+            <button class="tablinks" onclick="toggleNav()">目录</button>
+            <button class="tablinks" onclick="openBrainMapping();downToEmpty()">新建</button>
+            <button class="tablinks" onclick="saveMap()">保存</button>
+            <button class="tablinks" onclick="delMap()">删除</button>
+            <button class="tablinks" onclick="searchMap()">搜索</button>
+            <input type="file" id="fileInput" style="display:none">
+            <button class="tablinks" onclick="document.getElementById('fileInput').click();">上传</button>
+            <button class="tablinks" onclick="fileExport()">备份</button>
+            <button class="tablinks" onclick="screenShot()">导出</button>
+            <button class="tablinks" onclick="shortCuts()">按键</button>
+        </div>
+        <div id="mySidepanel" class="sidepanel">
+            <div id="verticalBox">
+                <ul></ul>
+            </div>
+        </div>
+        <div id="brainmapping"></div>
+        <div id="hideIds" style="display:none;"></div>
+    </div>
+    <script src="/lib/layui/layui.js"></script>
+    <script src="../../js/global.companent.js"></script>
+    <script type="text/javascript" src="/lib/jsmind/es6/jsmind.js"></script>
+    <script type="text/javascript" src="/lib/jsmind/es6/jsmind.draggable-node.js"></script>
+    <script type="text/javascript" src="/lib/jsmind/es6/jsmind.screenshot.js"></script>
+    <script>
+        layui.use([
+            'layer', 'form'
+        ], function () {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+    </script>
+</body>
+
+</html>

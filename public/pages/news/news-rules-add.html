@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加新闻规则</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">网站名称：</span><input id="webName" type="text"
+                        placeholder="请输入网站名称" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">网站地址：</span><input id="nameSafe" type="text"
+                        placeholder="请输入网站地址" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">初建时间：</span><input id="changeDate" type="date"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">内容条件：</span><input id="namePublish" type="text"
+                        placeholder="请输入新闻规则条件语法" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">条件类别：</span>
+                    <select id="safeType" style="width:273px;">
+                            <option>== 请选择 ==</option>
+                            <option value="0">API</option>
+                            <option value="1">网站</option>
+                            <option value="2">RSS</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">所属分类：</span>
+                    <select id="inCatalogue" style="width:273px;">
+                            <option>== 请选择 ==</option>
+                            <option value="0">综合</option>
+                            <option value="1">财经</option>
+                            <option value="2">IT</option>
+                            <option value="3">观点</option>
+                            <option value="4">娱乐</option>
+                            <option value="5">影音</option>
+                            <option value="6">福利</option>
+                            <option value="7">学习</option>
+                            <option value="8">运动</option>
+                            <option value="9">游戏</option>
+                    </select>
+                </td>
+            <tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">是否执行：</span>
+                    <select id="checkAction" style="width:273px;">
+                            <option>== 请选择 ==</option>
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                    </select>
+                </td>
+            <tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">规则模式：</span>
+                    <select id="checkModel" style="width:273px;">
+                            <option>== 请选择 ==</option>
+                            <option value="1">模式一</option>
+                            <option value="2">模式二</option>
+                            <option value="3">模式三</option>
+                            <option value="4">模式四</option>
+                            <option value="5">模式五</option>
+                            <option value="6">模式六</option>
+                    </select>
+                </td>
+            <tr>
+        </table>
+    </div>
+</body>
+
+</html>

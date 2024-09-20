@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>财富增值攻略系统之寰宇新闻区</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="/lib/jquery-ui/jquery-ui.min.css">
+    <script src="/lib/jquery/jquery.js"></script>
+    <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../../js/global.js" defer></script>
+    <script src="../../js/globalnews.js" defer></script>
+</head>
+
+<body>
+    <div id="top">
+        <div class="topBox">
+            <h1 style="position: relative;left: 20px;"><img src="../../images/economic-logo-white.svg"
+                    style="width:30px;margin-right:10px;">寰宇新闻区</h1>
+        </div>
+        <div class="topBox">
+            <ul>
+                <li id="backHome"><img src="../../images/iconhuaban1-15-white.svg" style="width:30px;">
+                    <p>首页</p>
+                </li>
+                <li id="loginOut"><img src="../../images/iconhuaban1-01-white.svg" style="width:30px;">
+                    <p>登出</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 0)" id="defaultOpen">综合</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 1)" id="defaultOpen">财经</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 2)" id="defaultOpen">科技</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 3)" id="defaultOpen">观点</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 4)" id="defaultOpen">娱乐</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 5)" id="defaultOpen">影音</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 6)" id="defaultOpen">福利</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 7)" id="defaultOpen">学习</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 8)" id="defaultOpen">运动</button>
+            <button class="tablinks" onclick="openCity(event, 'newsCrawler'); getGlobalNews('', 9)" id="defaultOpen">游戏</button>
+            <button class="tablinks" onclick="openCity(event, 'newsAnnouncementArea')">公告</button>
+            <button class="tablinks" onclick="openCity(event, 'newsFavorite'); getFavorGlobalNews()">喜爱</button>
+        </div>
+        <div id="newsCrawler" class="tabcontent">
+            <table id="inputTable" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnSearch" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnAdd" type="button" value="+收藏" title="收藏" style="background-color:cadetblue;" />
+                    </td>
+                    <td>
+                        <input id="btnRules" type="button" value="ƒ规则源" title="规则源" style="background-color:purple;" />
+                    </td>
+                    <td>
+                        <input id="btnBlack" type="button" value="▤黑名单" title="黑名单"
+                            style="background-color:black;" />
+                    </td>
+                    <td>
+                        <input id="exportExcel" type="button" value="∫导出" title="导出"
+                            style="background-color:green;" />
+                    </td>
+                    <td>
+                        <input id="wordCloud" type="button" value="Ω词云" title="词云"
+                            style="background-color:orchid;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        关键词搜索：<input id="nameItem" type='text' class='txt' placeholder='财经'/>
+                    </td>
+                    <td>
+                        <input id="searchBtn" type="button" value="ø搜索" style="background-color:crimson;" title="搜索"/>
+                    </td>
+                    <td>
+                        <span id="newsTotal"></span>
+                        <span id="areaId" style="display:none;"></span>
+                    </td>
+                </tr>
+            </table>
+            <div id="newsContent">
+                <ul></ul>
+            </div>
+            <div id="hideNewsId" style="display:none;"></div>
+        </div>
+        <div id="newsAnnouncementArea" class="tabcontent">
+            <table id="inputTableThree" class="tableService">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnAnnouncementSearch" type="button" value="å刷新" title="刷新"
+                            style="background-color:goldenrod;" />
+                    </td>
+                    <td>
+                        <input id="btnAnnouncementAdd" type="button" value="+收藏" title="收藏" style="background-color:cadetblue;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        关键词搜索：<input id="nameAnnouncement" type='text' class='txt' placeholder='通知'/>
+                    </td>
+                    <td>
+                        <input id="searchAnnouncementBtn" type="button" value="ø搜索" style="background-color:crimson;" title="搜索"/>
+                    </td>
+                    <td>
+                        <span id="announcementTotal"></span>
+                    </td>
+                </tr>
+            </table>
+            <div id="newsAnnouncement">
+                <ul></ul>
+            </div>
+            <div id="hideAnnouncementId" style="display:none;"></div>
+        </div>
+        <div id="newsFavorite" class="tabcontent">
+            <table id="inputTableTwo" class="tableService" style="padding-top: 10px;">
+                <tr>
+                    <td>
+                        <label class="divideLine">功能区</label>
+                    </td>
+                    <td>
+                        <input id="btnDelete" type="button" value="X删除" title="删除" style="background-color:crimson;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="divideLine">搜索区</label>
+                    </td>
+                    <td>
+                        关键词搜索：<input id="searchName" type='text' class='txt' placeholder='财经'/>
+                    </td>
+                    <td>
+                        <input id="searchBtnTwo" type="button" value="ø搜索" style="background-color:crimson;"  title="搜索"/>
+                    </td>
+                    <td>
+                        <span id="newsFavorTotal"></span>
+                    </td>
+                </tr>
+            </table>
+            <div id="newsFavor">
+                <ul></ul>
+            </div>
+            <div id="newsFavorId" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script src="/lib/layui/layui.js"></script>
+    <script src="../../js/global.companent.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+    </script>
+</body>
+
+</html>

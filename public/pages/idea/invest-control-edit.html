@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>编辑城市投资信息</title>
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+        <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const getId = urlParams.get('ids');
+        //jQuery ready
+        $(function () {
+            $('#hideIds').html(getId);
+            $.ajax({
+                url: '/api/getInvestIdTable',
+                type: 'GET',
+                data: {
+                    ids: getId
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data[0].ret) {
+                        let parse = JSON.parse(data[0].code);
+                        for (let i = 0; i < parse.length; i++) {
+                            $('#nameSafe').val(parse[i].investname);
+                            $('#changeDate').val(parse[i].useday.split('T')[0]);
+                            $('#namePublish').val(parse[i].publish);
+                            $('#moneyVal').val(parse[i].revenue);
+                            $('#remarks').val(parse[i].remarks);
+                            $('#safeType').val(parse[i].baltype);
+                        }
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+                complete: function (res) {
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div>
+        <table id="inputTable" style="width:100%;padding:10px 5px;border:0;">
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">投资名称：</span><input id="nameSafe" type="text"
+                        placeholder="请输入投资标的名称" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">何时投资：</span><input id="changeDate" type="date"
+                        style="width:273px;border:none;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">承销机构：</span><input id="namePublish" type="text"
+                        placeholder="请输入保险承保机构" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">投资金额：</span><input id="moneyVal" type="number"
+                        placeholder="请输入数值" style="width:273px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">投资类别：</span>
+                    <select id="safeType" style="width:273px;">
+                            <option>== 请选择 ==</option>
+                            <option value="0">基金</option>
+                            <option value="1">股票</option>
+                            <option value="2">期货</option>
+                            <option value="3">房产</option>
+                            <option value="4">外汇</option>
+                            <option value="5">古董</option>
+                            <option value="6">贵金属</option>
+                            <option value="7">艺术品</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span style="padding-left:5px;">攻略备注：</span>
+                    <input id="remarks" placeholder="攻略备注……" type="text" style="width:273px;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

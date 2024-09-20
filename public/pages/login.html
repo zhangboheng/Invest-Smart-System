@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>财富增值攻略系统登录界面</title>
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
+    <script src="/lib/jquery/jquery.min.js"></script>
+</head>
+
+<body style="overflow:hidden;">
+    <div id="main">
+        <div id="left">
+            <div id="leftBox">
+                <h1>财富增值攻略系统</h1>
+                <hr />
+                <p id="updateLog">Version 0.0.1</p>
+            </div>
+        </div>
+        <div id="right" style="display:table;">
+            <div style="display: table-cell; vertical-align: middle;">
+                <h2>LOG IN</h2><br />
+                <input id="login" type="text" placeholder="请输入账号" /><br />
+                <input id="password" type="password" placeholder="请输入密码" /><br />
+                <input id="vertifyCode" type="password" placeholder="请输入验证码" /><span id='verify'></span><br />
+                <button id="loginBtn">登录</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/lib/layui/layui.js"></script>
+    <script src="../js/global.companent.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer,
+                form = layui.form;
+        });
+        //登录判断
+        $("#loginBtn").click(function () {
+            var login = $("#login").val();
+            var password = $("#password").val();
+            var captcha = $("#vertifyCode").val();
+            if (login == "" || password == "") {
+                layer.msg("请输入账号或密码");
+                return;
+            }else if(captcha == ""){
+                layer.msg("请输入验证码");
+                return;
+            }
+            $.ajax({
+                url: "/loginUser",
+                type: "POST",
+                data: {
+                    login: login,
+                    password: password,
+                    captcha:captcha
+                },
+                success: function (res) {
+                    let data = JSON.parse(res);
+                    if (data[0].ret) {
+                        layer.msg(data[0].code);
+                        window.location.href = '/';
+                    } else {
+                        layer.msg(data[0].code);
+                    }
+                }
+            });
+        });
+        //弹出更新历史界面
+        $('#updateLog').click(function () {
+            var index = layer.open({
+                type: 2,
+                content: './pages/update-history.html',
+                area: ['320px', '100vh'],
+                title: '更新历史详情'
+            });
+            layer.full(index);
+        });
+        //获取验证码
+        function getVerify() {
+            $.ajax({
+                url: '/verifyCode?t=' + Math.random(),
+                type: 'get',
+                success: function (data) {
+                    $('#verify').html(data);
+                }
+            })
+        }
+        getVerify();
+        $('#verify').on('click', function () {
+            getVerify()
+        });
+        //点击回车进入
+        var enterToIndex = document.getElementById("vertifyCode");
+        enterToIndex.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("loginBtn").click();
+            }
+});
+    </script>
+</body>
+
+</html>
